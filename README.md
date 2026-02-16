@@ -1,1 +1,1 @@
-# arkahub_t1
+# expenditure manager
