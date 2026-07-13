@@ -1,4 +1,4 @@
-# Finance dashboard\
+# Finance dashboard
 
 # 💳 FinWallet – Digital Wallet Application
 
@@ -226,6 +226,17 @@ Inspired by real-world digital wallet applications such as Paytm, PhonePe, Googl
 - 💼 Java Full Stack Learner
 - 🌱 Learning Angular & Spring Boot
 - 💻 Computer Science Engineer
+
+---
+## 📅 Learning Progress
+
+- [x] Episode 1 - Project Setup
+- [ ] Episode 2 - Backend Configuration
+- [ ] Episode 3 - User Management
+- [ ] Episode 4 - Wallet API
+- [ ] Episode 5 - Angular Integration
+- [ ] Episode 6 - Transaction History
+- [ ] Episode 7 - Deployment
 
 ---
 
