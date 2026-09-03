@@ -1,0 +1,44 @@
+<div class="header-row">
+  <h1 class="page-title">Accounts</h1>
+  <a routerLink="/accounts/create" class="btn-primary">+ Create Account</a>
+</div>
+
+<div class="error-banner" *ngIf="errorMessage">{{ errorMessage }}</div>
+<div class="success-banner" *ngIf="successMessage">{{ successMessage }}</div>
+
+<input
+  type="text"
+  class="search-input"
+  placeholder="Search by account number or holder name"
+  [(ngModel)]="searchQuery"
+  (ngModelChange)="applyFilter()"
+/>
+
+<p class="loading-text" *ngIf="loading">Loading accounts...</p>
+
+<table class="data-table" *ngIf="!loading">
+  <thead>
+    <tr>
+      <th>Account Number</th>
+      <th>Account Holder</th>
+      <th>Balance</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let acc of filteredAccounts">
+      <td>{{ acc.accountNumber }}</td>
+      <td>{{ acc.accountHolderName }}</td>
+      <td>₹{{ acc.balance | number:'1.2-2' }}</td>
+      <td><span class="status-badge" [ngClass]="acc.status">{{ acc.status }}</span></td>
+      <td class="actions-cell">
+        <button class="btn-link" (click)="confirmClose(acc)" [disabled]="acc.status === 'INACTIVE'">Close</button>
+        <button class="btn-link danger" (click)="confirmDelete(acc)">Delete</button>
+      </td>
+    </tr>
+    <tr *ngIf="filteredAccounts.length === 0">
+      <td colspan="5" class="empty-row">No accounts found</td>
+    </tr>
+  </tbody>
+</table>

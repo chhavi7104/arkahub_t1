@@ -1,0 +1,34 @@
+<h1 class="page-title">Deposit / Withdraw</h1>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-card">
+  <div class="form-group">
+    <label for="accountNumber">Account Number</label>
+    <input id="accountNumber" type="text" formControlName="accountNumber" />
+    <span class="error-text" *ngIf="f['accountNumber'].touched && f['accountNumber'].errors?.['required']">
+      Account number is required.
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label for="operationType">Operation Type</label>
+    <select id="operationType" formControlName="operationType">
+      <option value="DEPOSIT">Deposit</option>
+      <option value="WITHDRAW">Withdraw</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="amount">Amount</label>
+    <input id="amount" type="number" formControlName="amount" />
+    <span class="error-text" *ngIf="f['amount'].touched && f['amount'].errors?.['min']">
+      Amount must be greater than 0.
+    </span>
+  </div>
+
+  <div class="success-text" *ngIf="successMessage">{{ successMessage }}</div>
+  <div class="error-text" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <button type="submit" class="btn-primary" [disabled]="submitting">
+    {{ submitting ? 'Processing...' : 'Submit' }}
+  </button>
+</form>

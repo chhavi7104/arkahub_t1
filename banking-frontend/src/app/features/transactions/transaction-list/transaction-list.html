@@ -1,0 +1,40 @@
+<h1 class="page-title">Transactions</h1>
+
+<div class="error-banner" *ngIf="errorMessage">{{ errorMessage }}</div>
+<p class="loading-text" *ngIf="loading">Loading transactions...</p>
+
+<ng-container *ngIf="!loading && !errorMessage">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Transaction ID</th>
+        <th>From Account</th>
+        <th>To Account</th>
+        <th>Amount</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let txn of transactions">
+        <td>{{ txn.transactionId }}</td>
+        <td>{{ txn.fromAccount || '-' }}</td>
+        <td>{{ txn.toAccount || '-' }}</td>
+        <td>₹{{ txn.amount | number:'1.2-2' }}</td>
+        <td>{{ txn.transactionType }}</td>
+        <td><span class="status-badge" [ngClass]="txn.status">{{ txn.status }}</span></td>
+        <td>{{ txn.createdAt | date:'short' }}</td>
+      </tr>
+      <tr *ngIf="transactions.length === 0">
+        <td colspan="7" class="empty-row">No transactions found</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+    <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage + 1 >= totalPages">Next</button>
+  </div>
+</ng-container>

@@ -1,0 +1,54 @@
+<h1 class="page-title">Dashboard</h1>
+
+<div class="error-banner" *ngIf="errorMessage">{{ errorMessage }}</div>
+<p class="loading-text" *ngIf="loading">Loading dashboard...</p>
+
+<ng-container *ngIf="!loading && !errorMessage">
+  <div class="summary-cards">
+    <div class="card">
+      <span class="card-label">Total Accounts</span>
+      <span class="card-value">{{ totalAccounts }}</span>
+    </div>
+    <div class="card">
+      <span class="card-label">Total Balance</span>
+      <span class="card-value">₹{{ totalBalance | number:'1.2-2' }}</span>
+    </div>
+    <div class="card">
+      <span class="card-label">Successful Transactions</span>
+      <span class="card-value success">{{ successfulTransactions }}</span>
+    </div>
+    <div class="card">
+      <span class="card-label">Failed Transactions</span>
+      <span class="card-value failed">{{ failedTransactions }}</span>
+    </div>
+  </div>
+
+  <h2 class="section-title">Recent Transactions</h2>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Transaction ID</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Amount</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let txn of recentTransactions">
+        <td>{{ txn.transactionId }}</td>
+        <td>{{ txn.fromAccount || '-' }}</td>
+        <td>{{ txn.toAccount || '-' }}</td>
+        <td>₹{{ txn.amount | number:'1.2-2' }}</td>
+        <td>{{ txn.transactionType }}</td>
+        <td><span class="status-badge" [ngClass]="txn.status">{{ txn.status }}</span></td>
+        <td>{{ txn.createdAt | date:'short' }}</td>
+      </tr>
+      <tr *ngIf="recentTransactions.length === 0">
+        <td colspan="7" class="empty-row">No recent transactions</td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>

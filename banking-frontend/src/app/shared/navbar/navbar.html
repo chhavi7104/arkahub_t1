@@ -1,0 +1,14 @@
+<nav class="sidebar">
+  <div class="logo">Smart Banking</div>
+  <ul class="nav-links">
+    <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+    <li><a routerLink="/accounts" routerLinkActive="active">Accounts</a></li>
+    <li><a routerLink="/transactions" routerLinkActive="active">Transactions</a></li>
+    <li><a routerLink="/transfer" routerLinkActive="active">Transfer</a></li>
+    <li><a routerLink="/deposit-withdraw" routerLinkActive="active">Deposit / Withdraw</a></li>
+  </ul>
+  <div class="nav-footer">
+    <span class="username" *ngIf="username">{{ username }}</span>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+</nav>

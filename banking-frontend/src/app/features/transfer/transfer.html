@@ -1,0 +1,34 @@
+<h1 class="page-title">Transfer Money</h1>
+
+<form [formGroup]="transferForm" (ngSubmit)="onSubmit()" class="form-card">
+  <div class="form-group">
+    <label for="senderAccountNumber">Sender Account Number</label>
+    <input id="senderAccountNumber" type="text" formControlName="senderAccountNumber" />
+    <span class="error-text" *ngIf="f['senderAccountNumber'].touched && f['senderAccountNumber'].errors?.['required']">
+      Sender account is required.
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label for="receiverAccountNumber">Receiver Account Number</label>
+    <input id="receiverAccountNumber" type="text" formControlName="receiverAccountNumber" />
+    <span class="error-text" *ngIf="f['receiverAccountNumber'].touched && f['receiverAccountNumber'].errors?.['required']">
+      Receiver account is required.
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label for="amount">Amount</label>
+    <input id="amount" type="number" formControlName="amount" />
+    <span class="error-text" *ngIf="f['amount'].touched && f['amount'].errors?.['min']">
+      Amount must be greater than 0.
+    </span>
+  </div>
+
+  <div class="success-text" *ngIf="successMessage">{{ successMessage }}</div>
+  <div class="error-text" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <button type="submit" class="btn-primary" [disabled]="submitting">
+    {{ submitting ? 'Processing...' : 'Transfer' }}
+  </button>
+</form>
