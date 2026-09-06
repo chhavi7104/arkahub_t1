@@ -66,6 +66,7 @@ FinWallet/
 └── README.md
 ```
 
+
 ---
 
 ## 📌 Functionalities
